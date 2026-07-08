@@ -1,0 +1,51 @@
+/* Elimina márgenes y paddings por defecto */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hace que html y body ocupen toda la altura */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+/* Fuente por defecto */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Imágenes responsivas */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Listas */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Botones */
+button {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  font: inherit;
+}

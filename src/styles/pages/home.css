@@ -1,0 +1,30 @@
+.home {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 2rem;
+}
+.home h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.last-update {
+  text-align: end;
+  margin-top: 2rem;
+}
+.summary-card {
+  grid-column: 1 / -1;
+}

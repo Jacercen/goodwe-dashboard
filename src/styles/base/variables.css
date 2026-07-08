@@ -1,0 +1,15 @@
+:root {
+  --background: #10141f;
+  --surface: #1b2233;
+
+  --text: #ffffff;
+  --text-secondary: #a8b0c0;
+
+  --yellow: #f9c74f;
+  --green: #4caf50;
+  --blue: #42a5f5;
+  --orange: #ff9800;
+
+  --radius: 16px;
+  --shadow: 0 0px 5px rgba(255, 255, 255, 0.753);
+}
