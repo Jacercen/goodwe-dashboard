@@ -61,9 +61,9 @@ npm run dev
 
 ## Backend
 
-This frontend requires the companion Spring Boot API.
+This frontend consumes a custom Spring Boot REST API.
 
-The backend is currently private while development continues.
+The backend is currently private while it is being refactored and documented before its public release.
 
 ---
 
@@ -77,11 +77,13 @@ The backend is currently private while development continues.
 - [ ] Energy savings calculation
 - [ ] Raspberry Pi deployment
 - [ ] Docker support
+- [ ] Plant details page
+- [ ] Statistics page
+- [ ] Weather integration
+- [ ] Energy savings calculation
+- [ ] Raspberry Pi deployment
+- [ ] Docker support
+- [ ] Light/Dark theme
 
 ---
 
-## Screenshots
-
-More screenshots will be added as the project evolves.
-
----
