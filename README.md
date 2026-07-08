@@ -1,58 +1,48 @@
-# GoodWe Dashboard Frontend
+# GoodWe Dashboard
 
-A React application that provides a modern and user-friendly dashboard for monitoring a GoodWe photovoltaic installation.
+A modern React dashboard for monitoring GoodWe photovoltaic installations.
 
-This frontend consumes the custom Spring Boot REST API developed for the project instead of communicating directly with GoodWe.
+This application consumes a custom Spring Boot REST API that retrieves and processes data from the GoodWe SEMS Portal.
+
+> **Note:** The backend API is currently private while it is being cleaned up and documented.
+
+---
+
+## Preview
+
+![Dashboard](docs/home-dashboard.png)
+
+---
 
 ## Features
 
-- Home dashboard with the most relevant information
-- Technical data page
-- Automatic refresh of plant data
-- Responsive layout
-- Reusable React components
-- REST API integration with Axios
+- ☀️ Real-time solar production
+- 🏠 Home consumption
+- 🔋 Battery status and charge
+- ⚡ Grid power monitoring
+- 📊 Daily and total generation summary
+- 🔄 Automatic dashboard refresh
+- 📱 Responsive layout
 
-## Current Information Displayed
-
-- Solar production
-- Home consumption
-- Battery state of charge
-- Battery status
-- Grid power
-- Daily generation
-- Total generation
-- Last update time
+---
 
 ## Tech Stack
 
 - React
-- React Router
+- Vite
 - Axios
+- React Router
 - React Icons
 - CSS3
 
-## Project Structure
-
-```
-src
-│
-├── api
-├── components
-├── pages
-├── styles
-│   ├── base
-│   ├── components
-│   └── pages
-└── main.jsx
-```
+---
 
 ## Installation
 
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Jacercen/goodwe-dashboard.git
 ```
 
 Install dependencies:
@@ -61,42 +51,37 @@ Install dependencies:
 npm install
 ```
 
-Start the development server:
+Run the application:
 
 ```bash
 npm run dev
 ```
 
-The application will be available at:
-
-```
-http://localhost:5173
-```
+---
 
 ## Backend
 
-This project requires the GoodWe API backend running locally.
+This frontend requires the companion Spring Boot API.
 
-Default backend URL:
+The backend is currently private while development continues.
 
-```
-http://localhost:8080/api/goodwe
-```
+---
 
-## Future Improvements
+## Roadmap
 
-- Statistics page
-- Interactive charts
-- Weather integration
-- Energy savings calculations
-- Responsive improvements
-- Dark/Light theme
-- Raspberry Pi deployment
+- [x] Home dashboard
+- [x] Live data refresh
+- [x] Responsive cards
+- [ ] Statistics page
+- [ ] Weather integration
+- [ ] Energy savings calculation
+- [ ] Raspberry Pi deployment
+- [ ] Docker support
 
-## Preview
+---
 
+## Screenshots
 ![Home Dashboard](docs/dashboard.png)
+More screenshots will be added as the project evolves.
 
-## Status
-
-🚧 Work in progress.
+---
