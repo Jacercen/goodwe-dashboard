@@ -10,7 +10,7 @@ This application consumes a custom Spring Boot REST API that retrieves and proce
 
 ## Preview
 
-![Dashboard](docs/home-dashboard.png)
+![Home Dashboard](docs/dashboard.png)
 
 ---
 
@@ -81,7 +81,7 @@ The backend is currently private while development continues.
 ---
 
 ## Screenshots
-![Home Dashboard](docs/dashboard.png)
+
 More screenshots will be added as the project evolves.
 
 ---
