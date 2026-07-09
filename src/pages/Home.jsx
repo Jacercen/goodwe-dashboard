@@ -16,6 +16,7 @@ import EnergyCard from "../components/EnergyCard";
 
 function Home() {
   const [dashboard, setDashboard] = useState(null);
+
   const [lastUpdate, setLastUpdate] = useState("");
   useEffect(() => {
     async function loadDashboard() {
@@ -27,18 +28,21 @@ function Home() {
         console.error(error);
       }
     }
+
     loadDashboard();
+
     const interval = setInterval(loadDashboard, 5000);
     return () => clearInterval(interval);
   }, []);
   function getGridStatus(grid) {
     const value = parseFloat(grid);
 
-    if (value > 0) return "Comprando energía";
-    if (value < 0) return "Exportando energía";
+    if (value < 0) return "Comprando energía";
+    if (value > 0) return "Vendiendo energía";
 
     return "Sin intercambio";
   }
+
   if (!dashboard) {
     return (
       <div className="loading">
@@ -51,12 +55,23 @@ function Home() {
   const plant = dashboard.plant.data;
   const powerFlow = dashboard.powerFlow.data.powerflow;
   const inverter = dashboard.inverter;
+  console.log(powerFlow.grid);
   return (
     <div className="home">
       <h1>SOLAR DASHBOARD</h1>
       <div className="home-grid">
         <EnergyCard icon={<FaSolarPanel />} title="Producción Solar">
           <p>{powerFlow.pv}</p>
+
+          <div className="installation-production">
+            <span>Instalación 1: </span>
+            <span>{inverter.mppt1Power} W</span>
+          </div>
+
+          <div className="installation-production">
+            <span>Instalación 2: </span>
+            <span>{inverter.mppt2Power} W</span>
+          </div>
         </EnergyCard>
 
         <EnergyCard icon={<FaHouse />} title="Consumo">

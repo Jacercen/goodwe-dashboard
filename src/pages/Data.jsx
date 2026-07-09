@@ -33,7 +33,7 @@ function Data() {
     <div className="page">
       <h1>Dashboard</h1>
 
-      <PlantCard plant={plant} />
+      <PlantCard plant={plant} inverter={inverter} />
       <PowerFlowCard powerFlow={powerFlow} />
       <InverterCard inverter={inverter} />
     </div>
