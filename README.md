@@ -1,89 +1,57 @@
-# GoodWe Dashboard
+# Solar Monitor
 
-A modern React dashboard for monitoring GoodWe photovoltaic installations.
+Panel web para monitorizar una instalación solar GoodWe. Muestra el flujo de energía en tiempo real, estado de batería, producción, consumo, datos de la planta, gráfica diaria de potencia y meteorología de Yecla.
 
-This application consumes a custom Spring Boot REST API that retrieves and processes data from the GoodWe SEMS Portal.
+## Requisitos
 
-> **Note:** The backend API is currently private while it is being cleaned up and documented.
+- Node.js 20 o superior
+- npm
+- El backend GoodWe disponible en `http://localhost:8080`
 
----
-
-## Preview
-
-![Home Dashboard](docs/dashboard.png)
-
----
-
-## Features
-
-- ☀️ Real-time solar production
-- 🏠 Home consumption
-- 🔋 Battery status and charge
-- ⚡ Grid power monitoring
-- 📊 Daily and total generation summary
-- 🔄 Automatic dashboard refresh
-- 📱 Responsive layout
-
----
-
-## Tech Stack
-
-- React
-- Vite
-- Axios
-- React Router
-- React Icons
-- CSS3
-
----
-
-## Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Jacercen/goodwe-dashboard.git
-```
-
-Install dependencies:
+## Instalación y ejecución
 
 ```bash
 npm install
-```
-
-Run the application:
-
-```bash
 npm run dev
 ```
 
----
+Vite mostrará la dirección local de la aplicación, normalmente `http://localhost:5173`.
 
-## Backend
+## Comandos
 
-This frontend consumes a custom Spring Boot REST API.
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run build` | Genera la versión de producción en `dist/`. |
+| `npm run preview` | Sirve localmente la compilación de producción. |
+| `npm run lint` | Analiza el código con ESLint. |
 
-The backend is currently private while it is being refactored and documented before its public release.
+## Backend esperado
 
----
+La aplicación consume el backend desde `http://localhost:8080/api/goodwe` mediante estos endpoints:
 
-## Roadmap
+- `GET /dashboard`
+- `GET /charts/power?date=YYYY-MM-DD`
+- `GET /charts/generation?range=...&date=YYYY-MM-DD`
 
-- [x] Home dashboard
-- [x] Live data refresh
-- [x] Responsive cards
-- [ ] Statistics page
-- [ ] Weather integration
-- [ ] Energy savings calculation
-- [ ] Raspberry Pi deployment
-- [ ] Docker support
-- [ ] Plant details page
-- [ ] Statistics page
-- [ ] Weather integration
-- [ ] Energy savings calculation
-- [ ] Raspberry Pi deployment
-- [ ] Docker support
-- [ ] Light/Dark theme
+El endpoint del dashboard debe proporcionar, entre otros, datos de `plant`, `inverter` y `powerFlow.data.powerflow`.
 
----
+> Nota: el campo de potencia de batería se llama `bettery` porque así lo entrega el backend. Se conserva ese nombre en el frontend para respetar el contrato actual de la API.
 
+## Servicios externos
+
+La tarjeta meteorológica consulta la API pública de Open-Meteo. Requiere acceso a Internet para mostrar el tiempo actual.
+
+## Estructura del proyecto
+
+```text
+src/
+├── api/          Clientes HTTP para GoodWe y meteorología
+├── components/   Componentes reutilizables del dashboard
+├── pages/        Vistas principales
+└── styles/       Estilos globales, de componentes y de página
+```
+
+## Despliegue
+
+Antes de publicar la aplicación, configura la URL del backend para el entorno objetivo y asegúrate de que el backend permita las peticiones desde el dominio del frontend mediante CORS o un proxy inverso.

@@ -1,0 +1,76 @@
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 0;
+  gap: 1rem;
+  padding: 0.25rem 0.35rem;
+}
+
+.dashboard-header-plant,
+.dashboard-header-info,
+.dashboard-system-status,
+.dashboard-header-date,
+.dashboard-header-time {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-header-plant { min-width: 0; gap: 0.8rem; }
+.dashboard-header-logo {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: 0 0 auto;
+  place-items: center;
+  background: rgba(249, 199, 79, 0.12);
+  border: 1px solid rgba(249, 199, 79, 0.22);
+  border-radius: 0.85rem;
+  color: var(--yellow);
+  font-size: 1.4rem;
+}
+.dashboard-header-plant h1 {
+  overflow: hidden;
+  color: var(--text);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dashboard-header-subtitle { display: block; margin-top: 0.2rem; color: var(--text-muted); font-size: 0.73rem; }
+
+.dashboard-header-info { flex: 0 0 auto; gap: 0.85rem; }
+.theme-toggle {
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: 0 0 auto;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--yellow); transform: translateY(-1px); }
+.dashboard-system-status { gap: 0.45rem; padding: 0.5rem 0.7rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); font-size: 0.75rem; font-weight: 650; white-space: nowrap; }
+.dashboard-system-status svg { font-size: 0.5rem; }
+.dashboard-system-status.online { color: var(--green); }
+.dashboard-system-status.offline { color: var(--orange); }
+.dashboard-header-divider { width: 1px; height: 1.5rem; background: var(--border); }
+.dashboard-header-date, .dashboard-header-time { gap: 0.4rem; color: var(--text-secondary); font-size: 0.78rem; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .dashboard-header-subtitle, .dashboard-header-divider, .dashboard-header-date { display: none; }
+}
+
+@media (max-width: 560px) {
+  .dashboard-header { align-items: flex-start; }
+  .dashboard-header-logo { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
+  .dashboard-header-info { padding-top: 0.2rem; }
+  .dashboard-system-status span, .dashboard-header-time span { display: none; }
+  .dashboard-system-status { padding: 0.55rem; }
+  .dashboard-header-time { font-size: 1rem; }
+}

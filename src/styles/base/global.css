@@ -1,8 +1,32 @@
 body {
-  background-color: var(--background);
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% -10%, rgba(66, 165, 245, 0.14), transparent 30rem),
+    radial-gradient(circle at 100% 0, rgba(249, 199, 79, 0.08), transparent 24rem),
+    var(--background);
   color: var(--text);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
   min-height: 100vh;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(66, 165, 245, 0.8);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

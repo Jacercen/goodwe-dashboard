@@ -1,15 +1,82 @@
 :root {
-  --background: #10141f;
-  --surface: #1b2233;
+  /* ===========================
+     COLORS
+  =========================== */
+
+  --background: #0b1020;
+  --surface: #151d31;
+  --surface-light: #202b45;
+  --surface-hover: #293854;
+  --surface-muted: #101827;
+
+  --border: #2a3955;
+  --border-strong: #3a4d70;
 
   --text: #ffffff;
-  --text-secondary: #a8b0c0;
+  --text-secondary: #aeb9cc;
+  --text-muted: #7f8ca4;
 
-  --yellow: #f9c74f;
-  --green: #4caf50;
+  /* ===========================
+     STATUS COLORS
+  =========================== */
+
   --blue: #42a5f5;
+  --green: #4caf50;
+  --yellow: #f9c74f;
   --orange: #ff9800;
+  --red: #ef5350;
 
-  --radius: 16px;
-  --shadow: 0 0px 5px rgba(255, 255, 255, 0.753);
+  /* ===========================
+     BUTTONS
+  =========================== */
+
+  --button-bg: var(--surface);
+  --button-hover: var(--surface-hover);
+  --button-active: var(--blue);
+
+  /* ===========================
+     CARDS
+  =========================== */
+
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+
+  /* ===========================
+     INPUTS
+  =========================== */
+
+  --input-bg: var(--surface);
+  --input-border: var(--border);
+
+  /* ===========================
+     EFFECTS
+  =========================== */
+
+  --radius: 18px;
+  --radius-small: 12px;
+
+  --transition: all 0.2s ease;
+
+  --shadow-soft: 0 3px 12px rgba(0, 0, 0, 0.18);
+  --shadow-medium: 0 14px 30px rgba(0, 0, 0, 0.24);
+  --shadow-glow: 0 0 10px rgba(66, 165, 245, 0.35);
+  --shadow: var(--shadow-soft);
+}
+
+:root[data-theme="light"] {
+  --background: #edf2f8;
+  --surface: #ffffff;
+  --surface-light: #ffffff;
+  --surface-hover: #f0f5fb;
+  --surface-muted: #f5f8fc;
+
+  --border: #d9e2ef;
+  --border-strong: #aebed4;
+
+  --text: #152238;
+  --text-secondary: #4f6078;
+  --text-muted: #718198;
+
+  --shadow-soft: 0 3px 12px rgba(31, 48, 75, 0.08);
+  --shadow-medium: 0 14px 30px rgba(31, 48, 75, 0.14);
 }

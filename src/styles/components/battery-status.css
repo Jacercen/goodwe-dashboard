@@ -1,0 +1,37 @@
+.battery-status { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 1.15rem; overflow: hidden; background: linear-gradient(145deg, var(--surface-light), var(--surface)); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }.battery-status-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }.battery-status-header h2 { margin-top: 0.15rem; color: var(--text); font-size: 1.05rem; }.battery-status-eyebrow { color: var(--text-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }.battery-status-header-icon { color: var(--green); font-size: 1.4rem; }.battery-status-main { display: flex; align-items: center; flex: 1; min-height: 0; gap: 1.1rem; padding: 0.8rem 0; }
+.battery-gauge { display: grid; width: 7.4rem; height: 7.4rem; flex: 0 0 auto; place-items: center; background: conic-gradient(var(--green) var(--battery-level), var(--surface-muted) 0); border-radius: 50%; }.battery-gauge::before { grid-area: 1 / 1; width: calc(100% - 0.7rem); height: calc(100% - 0.7rem); background: var(--surface); border-radius: 50%; content: ""; }.battery-gauge.medium { background: conic-gradient(var(--yellow) var(--battery-level), var(--surface-muted) 0); }.battery-gauge.low { background: conic-gradient(var(--orange) var(--battery-level), var(--surface-muted) 0); }.battery-gauge-value { z-index: 1; grid-area: 1 / 1; text-align: center; }.battery-gauge-value strong { display: block; color: var(--text); font-size: 1.65rem; letter-spacing: -0.05em; line-height: 1; }.battery-gauge-value span { color: var(--text-muted); font-size: 0.62rem; }.battery-status-reading { min-width: 0; }.battery-status-reading > span, .battery-status-reading > strong, .battery-status-reading > small { display: block; }.battery-status-reading > span { color: var(--text-muted); font-size: 0.68rem; }.battery-status-reading > strong { margin-top: 0.18rem; color: var(--text); font-size: 0.92rem; }.battery-status-reading > strong.charging { color: var(--green); }.battery-status-reading > strong.discharging { color: var(--yellow); }.battery-status-reading > small { margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.68rem; }.battery-status-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }.battery-detail { display: flex; align-items: center; min-width: 0; gap: 0.55rem; padding: 0.6rem; background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-small); color: var(--green); }.battery-detail > svg { flex: 0 0 auto; }.battery-detail div { min-width: 0; }.battery-detail span, .battery-detail strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.battery-detail span { color: var(--text-muted); font-size: 0.62rem; }.battery-detail strong { margin-top: 0.1rem; color: var(--text); font-size: 0.75rem; }
+@media (max-width: 760px) { .battery-status { min-height: 280px; padding: 1rem; }.battery-status-main { justify-content: center; }.battery-gauge { width: 6.5rem; height: 6.5rem; } }
+
+/* Las dos tarjetas laterales comparten una altura reducida en escritorio. */
+@media (min-width: 1200px) and (max-height: 1000px) {
+  .battery-status {
+    padding: 0.85rem 1rem;
+  }
+
+  .battery-status-header h2 {
+    font-size: 0.95rem;
+  }
+
+  .battery-status-main {
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+  }
+
+  .battery-gauge {
+    width: 5.4rem;
+    height: 5.4rem;
+  }
+
+  .battery-gauge-value strong {
+    font-size: 1.35rem;
+  }
+
+  .battery-status-reading > small {
+    margin-top: 0.25rem;
+    font-size: 0.62rem;
+  }
+
+  .battery-status-details {
+    display: none;
+  }
+}
