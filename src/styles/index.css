@@ -12,3 +12,5 @@
 @import "./components/weather-card.css";
 
 @import "./pages/dashboard.css";
+@import "./pages/login-page.css";
+@import "./pages/plant-selection.css";

@@ -1,40 +1,89 @@
 .dashboard {
   display: grid;
-  grid-template-rows: auto minmax(86px, auto) minmax(270px, 1.1fr) minmax(240px, 1fr);
+  grid-template-rows:
+    auto
+    minmax(86px, auto)
+    minmax(270px, 1.1fr)
+    minmax(240px, 1fr);
+
   gap: 0.75rem;
+
   width: 100%;
   min-height: 100vh;
+
   padding: clamp(0.75rem, 1.2vw, 1.25rem);
 }
+
+/* ========================================
+   GRID SECTIONS
+======================================== */
 
 .dashboard-metrics,
 .dashboard-middle,
 .dashboard-bottom {
   display: grid;
+
   min-width: 0;
   min-height: 0;
+
   gap: 0.75rem;
 }
+
+/* ========================================
+   METRICS
+======================================== */
 
 .dashboard-metrics {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+/* Planta sin batería: 3 tarjetas */
+.dashboard-metrics--without-battery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ========================================
+   MIDDLE
+======================================== */
+
 .dashboard-middle {
-  grid-template-columns: minmax(0, 2fr) minmax(300px, 0.9fr);
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(300px, 0.9fr);
 }
 
 .dashboard-middle-sidebar {
   display: grid;
   grid-template-rows: repeat(2, minmax(0, 1fr));
+
   min-width: 0;
   min-height: 0;
+
   gap: 0.75rem;
 }
 
-.dashboard-bottom {
-  grid-template-columns: minmax(0, 1.7fr) minmax(230px, 0.78fr) minmax(270px, 0.95fr);
+/*
+  Sin batería solo queda WeatherCard,
+  por lo que ocupa toda la altura disponible.
+*/
+.dashboard-middle-sidebar--without-battery {
+  grid-template-rows: minmax(0, 1fr);
 }
+
+/* ========================================
+   BOTTOM
+======================================== */
+
+.dashboard-bottom {
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(230px, 0.78fr)
+    minmax(270px, 0.95fr);
+}
+
+/* ========================================
+   GRID CHILDREN
+======================================== */
 
 .dashboard-metrics > *,
 .dashboard-middle > *,
@@ -44,17 +93,38 @@
   min-height: 0;
 }
 
+/* ========================================
+   DESKTOP FIXED SCREEN
+======================================== */
+
 @media (min-width: 1280px) and (min-height: 760px) {
   .dashboard {
     height: 100dvh;
+
     overflow: hidden;
   }
 }
 
-/* Tablet horizontal y vertical */
+/* ========================================
+   TABLET
+======================================== */
+
 @media (max-width: 1199px) {
   .dashboard {
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows:
+      auto
+      auto
+      auto
+      auto;
+  }
+
+  /*
+    En tablet las métricas siguen a 2 columnas,
+    independientemente de si hay batería.
+  */
+  .dashboard-metrics,
+  .dashboard-metrics--without-battery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dashboard-middle {
@@ -66,46 +136,72 @@
     grid-template-rows: minmax(220px, auto);
   }
 
+  /*
+    Sin batería solo existe WeatherCard.
+    Dejamos una única columna para que no quede
+    medio grid vacío.
+  */
+  .dashboard-middle-sidebar--without-battery {
+    grid-template-columns: 1fr;
+  }
+
   .dashboard-bottom {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dashboard-bottom > :first-child {
     grid-column: 1 / -1;
+
     min-height: 340px;
   }
 }
 
+/* ========================================
+   MOBILE
+======================================== */
+
 @media (max-width: 760px) {
   .dashboard {
     gap: 0.75rem;
+
     padding: 0.75rem;
   }
 
-  .dashboard-metrics {
+  .dashboard-metrics,
+  .dashboard-metrics--without-battery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 0.75rem;
   }
 
   .dashboard-middle,
   .dashboard-middle-sidebar,
+  .dashboard-middle-sidebar--without-battery,
   .dashboard-bottom {
     grid-template-columns: 1fr;
+
     gap: 0.75rem;
   }
 
-  .dashboard-middle-sidebar {
+  .dashboard-middle-sidebar,
+  .dashboard-middle-sidebar--without-battery {
     grid-template-rows: none;
   }
 
   .dashboard-bottom > :first-child {
     grid-column: auto;
+
     min-height: 360px;
   }
 }
 
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
 @media (max-width: 380px) {
-  .dashboard-metrics {
+  .dashboard-metrics,
+  .dashboard-metrics--without-battery {
     grid-template-columns: 1fr;
   }
 }

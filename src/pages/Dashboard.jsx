@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { getDashboard, getStatistics } from "../api/goodweApi";
 import { FaSolarPanel, FaHouse, FaBatteryHalf, FaBolt } from "react-icons/fa6";
 
@@ -15,9 +16,12 @@ const DashboardPowerChart = lazy(
 );
 
 function Dashboard() {
+  const { plantId } = useParams();
+
   const [dashboard, setDashboard] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [statistics, setStatistics] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("solar-monitor-theme");
 
@@ -36,28 +40,47 @@ function Dashboard() {
   }, [theme]);
 
   useEffect(() => {
+    let active = true;
+
     async function loadDashboard() {
       try {
         const [dashboardResponse, statisticsResponse] = await Promise.all([
-          getDashboard(),
-          getStatistics(),
+          getDashboard(plantId),
+          getStatistics(plantId),
         ]);
+
+        if (!active) {
+          return;
+        }
 
         setDashboard(dashboardResponse.data);
         setStatistics(statisticsResponse.data);
       } catch (error) {
+        if (!active) {
+          return;
+        }
+
         console.error("Error loading dashboard:", error);
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     }
 
+    setDashboard(null);
+    setStatistics(null);
+    setLoading(true);
+
     loadDashboard();
-    const interval = setInterval(() => {
-      loadDashboard();
-    }, 30000);
-    return () => clearInterval(interval);
-  }, []);
+
+    const interval = setInterval(loadDashboard, 30000);
+
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
+  }, [plantId]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -67,12 +90,21 @@ function Dashboard() {
     return <p>Could not load dashboard.</p>;
   }
 
-  const powerFlow = dashboard.powerFlow.data.powerflow;
+  const powerFlow = dashboard.powerFlow?.data?.powerflow;
   const inverter = dashboard.inverter;
   const plant = dashboard.plant;
 
+  const hasBattery = (plant?.data?.info?.battery_capacity ?? 0) > 0;
+
+  if (!powerFlow) {
+    return <p>Power flow data is not available.</p>;
+  }
   return (
-    <main className="dashboard">
+    <main
+      className={`dashboard ${
+        hasBattery ? "dashboard--with-battery" : "dashboard--without-battery"
+      }`}
+    >
       <DashboardHeader
         plant={plant}
         theme={theme}
@@ -81,7 +113,11 @@ function Dashboard() {
         }
       />
 
-      <section className="dashboard-metrics">
+      <section
+        className={`dashboard-metrics ${
+          !hasBattery ? "dashboard-metrics--without-battery" : ""
+        }`}
+      >
         <MetricCard
           title="Producción Solar"
           value={powerFlow.pv}
@@ -98,13 +134,15 @@ function Dashboard() {
           variant="load"
         />
 
-        <MetricCard
-          title="Batería"
-          value={`${powerFlow.soc}%`}
-          subtitle={inverter.batteryStatus}
-          icon={<FaBatteryHalf />}
-          variant="battery"
-        />
+        {hasBattery && (
+          <MetricCard
+            title="Batería"
+            value={`${powerFlow.soc}%`}
+            subtitle={inverter.batteryStatus}
+            icon={<FaBatteryHalf />}
+            variant="battery"
+          />
+        )}
 
         <MetricCard
           title="Red"
@@ -116,10 +154,20 @@ function Dashboard() {
       </section>
 
       <section className="dashboard-middle">
-        <EnergyFlow powerFlow={powerFlow} inverter={inverter} />
+        <EnergyFlow
+          powerFlow={powerFlow}
+          inverter={inverter}
+          hasBattery={hasBattery}
+        />
 
-        <div className="dashboard-middle-sidebar">
-          <BatteryStatus powerFlow={powerFlow} inverter={inverter} />
+        <div
+          className={`dashboard-middle-sidebar ${
+            !hasBattery ? "dashboard-middle-sidebar--without-battery" : ""
+          }`}
+        >
+          {hasBattery && (
+            <BatteryStatus powerFlow={powerFlow} inverter={inverter} />
+          )}
 
           <WeatherCard city="Yecla" />
         </div>
@@ -133,11 +181,12 @@ function Dashboard() {
             </section>
           }
         >
-          <DashboardPowerChart />
+          <DashboardPowerChart key={plantId} plantId={plantId} />
         </Suspense>
 
-        <TodaySummary statistics={statistics} />
-        <PlantInfo plant={plant} />
+        <TodaySummary statistics={statistics} hasBattery={hasBattery} />
+
+        <PlantInfo plant={plant} hasBattery={hasBattery} />
       </section>
     </main>
   );

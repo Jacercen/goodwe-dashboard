@@ -12,21 +12,26 @@ import {
 import { getPowerChart } from "../../api/goodweApi";
 import PowerChartTooltip from "./PowerChartTooltip";
 
-function DashboardPowerChart() {
+function DashboardPowerChart({ plantId }) {
   const [chartData, setChartData] = useState([]);
   const [lines, setLines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hiddenLines, setHiddenLines] = useState([]);
+
   useEffect(() => {
     async function loadPowerChart() {
       try {
+        setLoading(true);
+
         const date = new Date().toISOString().split("T")[0];
 
-        const response = await getPowerChart(date);
+        const response = await getPowerChart(plantId, date);
 
         const apiLines = response.data.data.lines;
 
         if (!apiLines || apiLines.length === 0) {
+          setLines([]);
+          setChartData([]);
           return;
         }
 
@@ -38,6 +43,7 @@ function DashboardPowerChart() {
 
         const formattedData = apiLines[0].xy.map((point, index) => {
           const [hours, minutes] = point.x.split(":").map(Number);
+
           const row = {
             time: hours * 60 + minutes,
           };
@@ -53,13 +59,18 @@ function DashboardPowerChart() {
         setChartData(formattedData);
       } catch (error) {
         console.error("Error loading power chart:", error);
+
+        setLines([]);
+        setChartData([]);
       } finally {
         setLoading(false);
       }
     }
 
-    loadPowerChart();
-  }, []);
+    if (plantId) {
+      loadPowerChart();
+    }
+  }, [plantId]);
 
   function toggleLine(lineKey) {
     setHiddenLines((current) =>
@@ -98,6 +109,7 @@ function DashboardPowerChart() {
 
         <span className="dashboard-power-chart-date">Hoy</span>
       </div>
+
       <div className="power-chart-legend">
         {lines.map((line) => {
           const hidden = hiddenLines.includes(line.key);
@@ -106,6 +118,7 @@ function DashboardPowerChart() {
             <button
               key={line.key}
               className={`power-chart-legend-item ${hidden ? "hidden" : ""}`}
+              type="button"
               onClick={() => toggleLine(line.key)}
               aria-pressed={!hidden}
             >
@@ -119,6 +132,7 @@ function DashboardPowerChart() {
           );
         })}
       </div>
+
       <div className="dashboard-power-chart-container">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -139,6 +153,7 @@ function DashboardPowerChart() {
             <XAxis
               dataKey="time"
               type="number"
+              tickMargin={10}
               domain={[0, 1440]}
               ticks={[0, 240, 480, 720, 960, 1200, 1440]}
               tickFormatter={(minutes) => {
@@ -160,6 +175,8 @@ function DashboardPowerChart() {
               stroke="var(--text-secondary)"
               tickLine={false}
               axisLine={false}
+              width={58}
+              tickMargin={8}
               unit=" W"
             />
 
@@ -167,6 +184,8 @@ function DashboardPowerChart() {
               yAxisId="soc"
               orientation="right"
               domain={[0, 100]}
+              width={48}
+              tickMargin={8}
               stroke="var(--text-secondary)"
               tickLine={false}
               axisLine={false}

@@ -2,62 +2,90 @@
   display: flex;
   flex-direction: column;
 
+  min-width: 0;
   min-height: 0;
-  padding: 1.25rem;
+
+  padding: 0.9rem 1rem 0.75rem;
 
   overflow: hidden;
+
   background: linear-gradient(145deg, var(--surface-light), var(--surface));
+
   border: 1px solid var(--border);
   border-radius: var(--radius);
 
   box-shadow: var(--shadow);
 }
 
+/* =========================
+   LOADING
+========================= */
+
 .dashboard-power-chart--loading {
   display: grid;
+
   min-height: 260px;
+
   place-items: center;
+
   color: var(--text-secondary);
 }
+
+/* =========================
+   HEADER
+========================= */
 
 .dashboard-power-chart-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 
-  margin-bottom: 1rem;
+  flex-shrink: 0;
+
+  gap: 0.75rem;
+
+  margin-bottom: 0.1rem;
 }
 
 .dashboard-power-chart-header h2 {
-  margin: 0.2rem 0 0;
+  margin: 0.1rem 0 0;
 
   color: var(--text);
 
-  font-size: 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .dashboard-power-chart-eyebrow {
   color: var(--text-secondary);
 
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.65rem;
+  font-weight: 700;
 
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .dashboard-power-chart-date {
-  padding: 0.45rem 0.8rem;
+  padding: 0.3rem 0.65rem;
 
   background: var(--background);
 
+  border: 1px solid var(--border);
   border-radius: 999px;
 
   color: var(--text-secondary);
 
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
+
+  white-space: nowrap;
 }
+
+/* =========================
+   CHART
+========================= */
 
 .dashboard-power-chart-container {
   flex: 1;
@@ -65,46 +93,74 @@
   width: 100%;
   min-width: 0;
   min-height: 0;
+
+  overflow: visible;
 }
+
+/*
+ * Evita que el SVG de Recharts
+ * corte elementos cercanos al borde.
+ */
+
+.dashboard-power-chart-container .recharts-wrapper {
+  overflow: visible;
+}
+
+.dashboard-power-chart-container .recharts-surface {
+  overflow: visible;
+}
+
+/* =========================
+   BOTTOM GRID
+========================= */
 
 .dashboard-bottom-grid {
   display: grid;
   grid-template-columns: 1fr;
 
-  gap: 1.5rem;
+  gap: 1rem;
 
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
-.power-chart-tooltip {
-  min-width: 180px;
-  padding: 0.9rem 1rem;
 
-  background: rgba(27, 34, 51, 0.96);
+/* =========================
+   TOOLTIP
+========================= */
+
+.power-chart-tooltip {
+  min-width: 170px;
+
+  padding: 0.75rem 0.85rem;
+
+  background: var(--surface);
+
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
+
+  color: var(--text);
 
   box-shadow: var(--shadow);
-
-  backdrop-filter: blur(8px);
 }
 
 .power-chart-tooltip-time {
   display: block;
 
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.6rem;
+  margin-bottom: 0.55rem;
+  padding-bottom: 0.45rem;
 
   border-bottom: 1px solid var(--border);
 
   color: var(--text);
-  font-size: 0.9rem;
+
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
 .power-chart-tooltip-values {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+
+  gap: 0.4rem;
 }
 
 .power-chart-tooltip-item {
@@ -112,22 +168,23 @@
   justify-content: space-between;
   align-items: center;
 
-  gap: 1.5rem;
+  gap: 1.25rem;
 
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .power-chart-tooltip-label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+
+  gap: 0.4rem;
 
   color: var(--text-secondary);
 }
 
 .power-chart-tooltip-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 
   flex-shrink: 0;
 
@@ -137,36 +194,45 @@
 .power-chart-tooltip-item strong {
   color: var(--text);
 
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
 
   white-space: nowrap;
 }
+
+/* =========================
+   LEGEND
+========================= */
+
 .power-chart-legend {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 
-  gap: 0.6rem;
+  flex-shrink: 0;
 
-  margin: 1.5rem 0 0.5rem;
+  gap: 0.4rem;
+
+  margin: 0.25rem 0 0.1rem;
 }
 
 .power-chart-legend-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 
-  padding: 0.5rem 0.75rem;
+  gap: 0.35rem;
+
+  padding: 0.32rem 0.55rem;
 
   background: var(--background);
-  color: var(--text-secondary);
 
   border: 1px solid var(--border);
   border-radius: 999px;
 
-  font-size: 0.8rem;
+  color: var(--text-secondary);
+
+  font-size: 0.7rem;
   font-weight: 600;
 
   cursor: pointer;
@@ -178,11 +244,13 @@
 }
 
 .power-chart-legend-item:hover {
-  transform: translateY(-1px);
   background: var(--surface);
+
+  transform: translateY(-1px);
 }
 
 .power-chart-legend-item:focus-visible {
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
 
@@ -195,36 +263,74 @@
 }
 
 .power-chart-legend-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 
   flex-shrink: 0;
 
   border-radius: 50%;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 700px) {
   .dashboard-power-chart {
     min-height: 360px;
-    padding: 1rem;
+
+    padding: 0.8rem;
+  }
+
+  .dashboard-power-chart-header {
+    gap: 0.5rem;
   }
 
   .dashboard-power-chart-header h2 {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
 
-  .power-chart-legend {
-    justify-content: flex-start;
-    margin-top: 1rem;
+  .dashboard-power-chart-eyebrow {
+    font-size: 0.6rem;
   }
 
   .dashboard-power-chart-date {
-    padding: 0.35rem 0.6rem;
-    font-size: 0.72rem;
+    padding: 0.25rem 0.5rem;
+
+    font-size: 0.65rem;
+  }
+
+  .power-chart-tooltip {
+    min-width: 150px;
+
+    padding: 0.7rem;
+  }
+
+  .power-chart-tooltip-time {
+    font-size: 0.75rem;
+  }
+
+  .power-chart-tooltip-item {
+    gap: 1rem;
+
+    font-size: 0.7rem;
+  }
+
+  .power-chart-tooltip-item strong {
+    font-size: 0.7rem;
+  }
+
+  .power-chart-legend {
+    justify-content: center;
+
+    gap: 0.3rem;
+
+    margin-top: 0.2rem;
   }
 
   .power-chart-legend-item {
-    padding: 0.42rem 0.65rem;
-    font-size: 0.74rem;
+    padding: 0.28rem 0.45rem;
+
+    font-size: 0.65rem;
   }
 }

@@ -3,36 +3,51 @@
      COLORS
   =========================== */
 
-  --background: #0b1020;
-  --surface: #151d31;
-  --surface-light: #202b45;
-  --surface-hover: #293854;
-  --surface-muted: #101827;
+  --background: #0b120d;
 
-  --border: #2a3955;
-  --border-strong: #3a4d70;
+  --surface: #142019;
+  --surface-light: #1b2b21;
+  --surface-hover: #253a2c;
+  --surface-muted: #101a14;
 
-  --text: #ffffff;
-  --text-secondary: #aeb9cc;
-  --text-muted: #7f8ca4;
+  --border: #2d4935;
+  --border-strong: #466c50;
+
+  --text: #f7faf7;
+  --text-secondary: #b8c8bb;
+  --text-muted: #819586;
 
   /* ===========================
-     STATUS COLORS
+     BRAND
+  =========================== */
+
+  --primary: #5eae2f;
+  --primary-hover: #6fbe3d;
+  --primary-active: #4d9725;
+  --primary-muted: #29451f;
+
+  /* ===========================
+     STATUS / ENERGY COLORS
   =========================== */
 
   --blue: #42a5f5;
-  --green: #4caf50;
+  --green: #5eae2f;
   --yellow: #f9c74f;
   --orange: #ff9800;
   --red: #ef5350;
+
+  --solar: var(--yellow);
+  --battery: var(--primary);
+  --grid: #a968ff;
+  --consumption: var(--blue);
 
   /* ===========================
      BUTTONS
   =========================== */
 
-  --button-bg: var(--surface);
-  --button-hover: var(--surface-hover);
-  --button-active: var(--blue);
+  --button-bg: var(--primary);
+  --button-hover: var(--primary-hover);
+  --button-active: var(--primary-active);
 
   /* ===========================
      CARDS
@@ -45,38 +60,56 @@
      INPUTS
   =========================== */
 
-  --input-bg: var(--surface);
+  --input-bg: var(--surface-muted);
   --input-border: var(--border);
 
   /* ===========================
      EFFECTS
   =========================== */
 
-  --radius: 18px;
-  --radius-small: 12px;
+  --radius: 14px;
+  --radius-small: 10px;
 
   --transition: all 0.2s ease;
 
-  --shadow-soft: 0 3px 12px rgba(0, 0, 0, 0.18);
-  --shadow-medium: 0 14px 30px rgba(0, 0, 0, 0.24);
-  --shadow-glow: 0 0 10px rgba(66, 165, 245, 0.35);
+  --shadow-soft: 0 3px 12px rgba(0, 0, 0, 0.22);
+
+  --shadow-medium: 0 14px 30px rgba(0, 0, 0, 0.28);
+
+  --shadow-glow: 0 0 14px rgba(94, 174, 47, 0.3);
+
   --shadow: var(--shadow-soft);
 }
 
+/* ===========================
+   LIGHT THEME
+=========================== */
+
 :root[data-theme="light"] {
-  --background: #edf2f8;
+  --background: #eef5ea;
+
   --surface: #ffffff;
-  --surface-light: #ffffff;
-  --surface-hover: #f0f5fb;
-  --surface-muted: #f5f8fc;
+  --surface-light: #fbfdf9;
+  --surface-hover: #edf5e9;
+  --surface-muted: #f4f8f1;
 
-  --border: #d9e2ef;
-  --border-strong: #aebed4;
+  --border: #bdd5b3;
+  --border-strong: #91b583;
 
-  --text: #152238;
-  --text-secondary: #4f6078;
-  --text-muted: #718198;
+  --text: #1b281d;
+  --text-secondary: #536557;
+  --text-muted: #7c8e80;
 
-  --shadow-soft: 0 3px 12px rgba(31, 48, 75, 0.08);
-  --shadow-medium: 0 14px 30px rgba(31, 48, 75, 0.14);
+  --primary: #5eae2f;
+  --primary-hover: #519c27;
+  --primary-active: #458821;
+  --primary-muted: #e7f2df;
+
+  --green: #5eae2f;
+
+  --shadow-soft: 0 3px 12px rgba(45, 75, 35, 0.08);
+
+  --shadow-medium: 0 14px 30px rgba(45, 75, 35, 0.12);
+
+  --shadow-glow: 0 0 12px rgba(94, 174, 47, 0.22);
 }

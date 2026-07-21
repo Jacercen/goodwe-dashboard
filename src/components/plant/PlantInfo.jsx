@@ -1,6 +1,6 @@
 import { FaCircleCheck, FaCircleXmark } from "react-icons/fa6";
 
-function PlantInfo({ plant }) {
+function PlantInfo({ plant, hasBattery }) {
   const info = plant.data.info;
 
   const isOnline = info.status === 1;
@@ -32,11 +32,12 @@ function PlantInfo({ plant }) {
           <span>Capacidad FV</span>
           <strong>{info.capacity} kWp</strong>
         </div>
-
-        <div className="plant-info-row">
-          <span>Capacidad batería</span>
-          <strong>{info.battery_capacity} kWh</strong>
-        </div>
+        {hasBattery && (
+          <div className="plant-info-row">
+            <span>Capacidad batería</span>
+            <strong>{info.battery_capacity} kWh</strong>
+          </div>
+        )}
 
         <div className="plant-info-row">
           <span>Estado</span>
