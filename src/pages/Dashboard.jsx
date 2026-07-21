@@ -168,8 +168,10 @@ function Dashboard() {
           {hasBattery && (
             <BatteryStatus powerFlow={powerFlow} inverter={inverter} />
           )}
-
-          <WeatherCard city="Yecla" />
+          <WeatherCard
+            latitude={dashboard.latitude}
+            longitude={dashboard.longitude}
+          />{" "}
         </div>
       </section>
 

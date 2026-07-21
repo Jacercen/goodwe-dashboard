@@ -7,28 +7,35 @@ import {
   FaWind,
 } from "react-icons/fa6";
 
-import { getWeatherByCity } from "../../api/WeatherApi";
+import { getWeather } from "../../api/WeatherApi";
 
-function WeatherCard({ city }) {
+function WeatherCard({ latitude, longitude }) {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadWeather() {
       try {
-        const data = await getWeatherByCity(city);
+        setLoading(true);
+
+        const data = await getWeather(latitude, longitude);
+
         setWeatherData(data);
       } catch (error) {
         console.error("Error loading weather:", error);
+        setWeatherData(null);
       } finally {
         setLoading(false);
       }
     }
 
-    if (city) {
+    if (latitude && longitude) {
       loadWeather();
+    } else {
+      setLoading(false);
+      setWeatherData(null);
     }
-  }, [city]);
+  }, [latitude, longitude]);
 
   if (loading) {
     return <section className="weather-card">Cargando tiempo...</section>;
@@ -38,7 +45,7 @@ function WeatherCard({ city }) {
     return <section className="weather-card">Tiempo no disponible</section>;
   }
 
-  const { weather, location } = weatherData;
+  const { weather } = weatherData;
 
   const getWeatherInfo = (code) => {
     if (code === 0) {
@@ -75,7 +82,8 @@ function WeatherCard({ city }) {
       <div className="weather-card-header">
         <div>
           <span className="weather-card-eyebrow">Tiempo actual</span>
-          <h2>{location.name}</h2>
+
+          <h2>Ubicación de la planta</h2>
         </div>
 
         <div className="weather-card-icon">{weatherInfo.icon}</div>
@@ -83,6 +91,7 @@ function WeatherCard({ city }) {
 
       <div className="weather-card-main">
         <strong>{Math.round(weather.temperature_2m)}°</strong>
+
         <span>{weatherInfo.label}</span>
       </div>
 
